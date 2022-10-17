@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>JavaScript Math Game</title>
+        <meta charset="utf-8" name="viewport" content="initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="styles.css" />
+        <link rel="icon" href="icon.png" />
+        <script type="text/javascript" src="script.js" defer></script>
+    </head>
+    
+    <body>
+        <h1>Welcome to the JavaScript Math Game!</h1>
+        <p>
+            Click the 'Start Game' button when you're ready to play the game. You have 10 seconds to answer each addition question
+            correctly and have 10 questions in total. Do your best and enjoy!
+        </p>
+        
+        <button id="start">Start Game</button>
+        
+        <h3>Question <span id="level">1</span>:</h3>
+        <div class="center" id="question">
+            <input class="vals" type="text" id="n1" disabled/>
+            <p id="op">+</p>
+            <input class="vals" type="text" id="n2" disabled/>
+        </div>
+        
+        <input type="text" placeholder="Enter answer here." id="answer"/>
+        <button id="sub" disabled>Submit</button>
+        
+        <h4>Time Remaining:</h4>
+        <h4 id="time">10</h4>
+        <p id="prompt"></p>
+        
+        <div class="center" id="record">
+            <p id="correct">Correct: <span id="right">0</span></p>
+            <p id="incorrect">Incorrect: <span id="wrong">0</span></p>
+        </div>
+        
+        <div class="center">
+            <a href=""><button id="reset" disabled>Reset Game</button></a>
+        </div>
+    </body>
+</html>

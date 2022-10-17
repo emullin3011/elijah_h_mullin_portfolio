@@ -1,318 +1,93 @@
-let btn1 = document.getElementById("btn1");
-let btn2 = document.getElementById("btn2");
-let btn3 = document.getElementById("btn3");
-let btn4 = document.getElementById("btn4");
-let btn5 = document.getElementById("btn5");
+function timer(){
+    let rem = parseInt(document.getElementById("time").innerHTML);
+    let lvl = parseInt(document.getElementById("level").innerHTML);
+    let w = parseInt(document.getElementById("wrong").innerHTML);
+    
+    if (document.getElementById("time").innerHTML != "--"){
+        rem--;
+        document.getElementById("time").innerHTML = rem;
 
-function bannerAnimation(){
-    if(document.getElementById("image").getAttribute("src") === "img1.jpg"){
-        $("#image").fadeOut(500).fadeIn(1, function(){
-            $("#image").attr("src", "img2.jpg");
+        if (rem == -1 && lvl != 10){
+            let ans = parseInt(document.getElementById("n1").value) + parseInt(document.getElementById("n2").value);
+            document.getElementById("prompt").style.color = "red";
+            document.getElementById("prompt").innerHTML = "Your time is up. The correct answer was: " + ans + ".";
+            question();
+            document.getElementById("time").innerHTML = "10";
+            document.getElementById("level").innerHTML = (lvl + 1);
+            document.getElementById("wrong").innerHTML = (w + 1);
+        } else if(rem == -1 && lvl == 10){
+            let ans = parseInt(document.getElementById("n1").value) + parseInt(document.getElementById("n2").value);
+            document.getElementById("prompt").style.color = "red";
+            document.getElementById("prompt").innerHTML = "Your time is up. The correct answer was: " + ans + ".";
             
-            $("#btn1").css({
-                backgroundColor: "transparent",
-                borderColor: "black"
-            });
-    
-            $("#btn2").css({
-                backgroundColor: "orange",
-                borderColor: "orange"
-            });
-
-            $("#btn3").css({
-                backgroundColor: "transparent",
-                borderColor: "black"
-            });
-
-            $("#btn4").css({
-                backgroundColor: "transparent",
-                borderColor: "black"
-            });
-
-            $("#btn5").css({
-                backgroundColor: "transparent",
-                borderColor: "black"
-            });
-        });
-    }
-    
-    else if(document.getElementById("image").getAttribute("src") === "img2.jpg"){
-        $("#image").fadeOut(500).fadeIn(1, function(){
-            $("#image").attr("src", "img3.jpg");
+            document.getElementById("time").innerHTML = "--";
+            alert("Game Over.\n\nScore: " + document.getElementById("right").innerHTML + "/" + lvl);
+            document.getElementById("wrong").innerHTML = (w + 1);
             
-            $("#btn1").css({
-                backgroundColor: "transparent",
-                borderColor: "black"
-            });
-    
-            $("#btn2").css({
-                backgroundColor: "transparent",
-                borderColor: "black"
-            });
-
-            $("#btn3").css({
-                backgroundColor: "orange",
-                borderColor: "orange"
-            });
-
-            $("#btn4").css({
-                backgroundColor: "transparent",
-                borderColor: "black"
-            });
-
-            $("#btn5").css({
-                backgroundColor: "transparent",
-                borderColor: "black"
-            });
-        });
-    }
-    
-    else if(document.getElementById("image").getAttribute("src") === "img3.jpg"){
-        $("#image").fadeOut(500).fadeIn(1, function(){
-            $("#image").attr("src", "img4.jpg");
-            
-            $("#btn1").css({
-                backgroundColor: "transparent",
-                borderColor: "black"
-            });
-    
-            $("#btn2").css({
-                backgroundColor: "transparent",
-                borderColor: "black"
-            });
-
-            $("#btn3").css({
-                backgroundColor: "transparent",
-                borderColor: "black"
-            });
-
-            $("#btn4").css({
-                backgroundColor: "orange",
-                borderColor: "orange"
-            });
-
-            $("#btn5").css({
-                backgroundColor: "transparent",
-                borderColor: "black"
-            });
-        });
-    }
-    
-    else if(document.getElementById("image").getAttribute("src") === "img4.jpg"){
-        $("#image").fadeOut(500).fadeIn(1, function(){
-            $("#image").attr("src", "img5.jpg");
-            
-            $("#btn1").css({
-                backgroundColor: "transparent",
-                borderColor: "black"
-            });
-    
-            $("#btn2").css({
-                backgroundColor: "transparent",
-                borderColor: "black"
-            });
-
-            $("#btn3").css({
-                backgroundColor: "transparent",
-                borderColor: "black"
-            });
-
-            $("#btn4").css({
-                backgroundColor: "transparent",
-                borderColor: "black"
-            });
-
-            $("#btn5").css({
-                backgroundColor: "orange",
-                borderColor: "orange"
-            });
-        });
-    }
-    
-    else{
-        $("#image").fadeOut(500).fadeIn(1, function(){
-            $("#image").attr("src", "img1.jpg");
-            
-            $("#btn1").css({
-                backgroundColor: "orange",
-                borderColor: "orange"
-            });
-    
-            $("#btn2").css({
-                backgroundColor: "transparent",
-                borderColor: "black"
-            });
-
-            $("#btn3").css({
-                backgroundColor: "transparent",
-                borderColor: "black"
-            });
-
-            $("#btn4").css({
-                backgroundColor: "transparent",
-                borderColor: "black"
-            });
-
-            $("#btn5").css({
-                backgroundColor: "transparent",
-                borderColor: "black"
-            });
-        });
+            document.getElementById("sub").disabled = true;
+            document.getElementById("reset").disabled = false;
+        }
     }
 }
 
-function slide(){
-    setInterval(bannerAnimation, 5000);
+function question(){
+    let n1 = Math.round(Math.random() * 10);
+    let n2 = Math.round(Math.random() * 10);
+    let ans = n1 + n2;
+    
+    document.getElementById("n1").value = n1;
+    document.getElementById("n2").value = n2;
 }
 
-function setImg1(){
-    $("#image").attr("src", "img1.jpg");
+function answer(){
+    let lvl = parseInt(document.getElementById("level").innerHTML);
+    let ans = parseInt(document.getElementById("n1").value) + parseInt(document.getElementById("n2").value);
+    let sub = parseInt(document.getElementById("answer").value);
+    let r = parseInt(document.getElementById("right").innerHTML);
+    let w = parseInt(document.getElementById("wrong").innerHTML);
     
-    $("#btn1").css({
-        backgroundColor: "orange",
-        borderColor: "orange"
-    });
-    
-    $("#btn2").css({
-        backgroundColor: "transparent",
-        borderColor: "black"
-    });
-    
-    $("#btn3").css({
-        backgroundColor: "transparent",
-        borderColor: "black"
-    });
-    
-    $("#btn4").css({
-        backgroundColor: "transparent",
-        borderColor: "black"
-    });
-    
-    $("#btn5").css({
-        backgroundColor: "transparent",
-        borderColor: "black"
-    });
+    if(sub == ans && lvl < 10){
+        document.getElementById("prompt").style.color = "green";
+        document.getElementById("prompt").innerHTML = "Correct!";
+        question();
+        document.getElementById("time").innerHTML = "10";
+        document.getElementById("level").innerHTML = (lvl + 1);
+        document.getElementById("right").innerHTML = (r + 1);
+        
+    } else if(sub != ans && lvl < 10){
+        document.getElementById("prompt").style.color = "red";
+        document.getElementById("prompt").innerHTML = "Wrong answer. The correct answer was: " + ans + ".";
+        question();
+        document.getElementById("time").innerHTML = "10";
+        document.getElementById("level").innerHTML = (lvl + 1);
+        document.getElementById("wrong").innerHTML = (w + 1);
+    } else if(lvl == 10){
+        if(sub == ans){
+            document.getElementById("prompt").style.color = "green";
+            document.getElementById("prompt").innerHTML = "Correct!";
+            document.getElementById("right").innerHTML = (r + 1);
+        
+        } else{
+            document.getElementById("prompt").style.color = "red";
+            document.getElementById("prompt").innerHTML = "Wrong answer. The correct answer was: " + ans + ".";
+            document.getElementById("wrong").innerHTML = (w + 1);
+        }
+        
+        document.getElementById("time").innerHTML = "--";
+        alert("Game Over.\n\nScore: " + document.getElementById("right").innerHTML + "/" + lvl);
+        
+        document.getElementById("sub").disabled = true;
+        document.getElementById("reset").disabled = false;
+    }
 }
 
-function setImg2(){
-    $("#image").attr("src", "img2.jpg");
-    
-    $("#btn1").css({
-        backgroundColor: "transparent",
-        borderColor: "black"
-    });
-    
-    $("#btn2").css({
-        backgroundColor: "orange",
-        borderColor: "orange"
-    });
-    
-    $("#btn3").css({
-        backgroundColor: "transparent",
-        borderColor: "black"
-    });
-    
-    $("#btn4").css({
-        backgroundColor: "transparent",
-        borderColor: "black"
-    });
-    
-    $("#btn5").css({
-        backgroundColor: "transparent",
-        borderColor: "black"
-    });
+function setTime(){
+    setInterval(timer, 1000);
+    document.getElementById("start").disabled = true;
+    document.getElementById("sub").disabled = false;
 }
 
-function setImg3(){
-    $("#image").attr("src", "img3.jpg");
-    
-    $("#btn1").css({
-        backgroundColor: "transparent",
-        borderColor: "black"
-    });
-    
-    $("#btn2").css({
-        backgroundColor: "transparent",
-        borderColor: "black"
-    });
-    
-    $("#btn3").css({
-        backgroundColor: "orange",
-        borderColor: "orange"
-    });
-    
-    $("#btn4").css({
-        backgroundColor: "transparent",
-        borderColor: "black"
-    });
-    
-    $("#btn5").css({
-        backgroundColor: "transparent",
-        borderColor: "black"
-    });
-}
+document.getElementById("start").addEventListener("click", setTime);
+document.getElementById("start").addEventListener("click", question);
 
-function setImg4(){
-    $("#image").attr("src", "img4.jpg");
-    
-    $("#btn1").css({
-        backgroundColor: "transparent",
-        borderColor: "black"
-    });
-    
-    $("#btn2").css({
-        backgroundColor: "transparent",
-        borderColor: "black"
-    });
-    
-    $("#btn3").css({
-        backgroundColor: "transparent",
-        borderColor: "black"
-    });
-    
-    $("#btn4").css({
-        backgroundColor: "orange",
-        borderColor: "orange"
-    });
-    
-    $("#btn5").css({
-        backgroundColor: "transparent",
-        borderColor: "black"
-    });
-}
-
-function setImg5(){
-    $("#image").attr("src", "img5.jpg");
-    
-    $("#btn1").css({
-        backgroundColor: "transparent",
-        borderColor: "black"
-    });
-    
-    $("#btn2").css({
-        backgroundColor: "transparent",
-        borderColor: "black"
-    });
-    
-    $("#btn3").css({
-        backgroundColor: "transparent",
-        borderColor: "black"
-    });
-    
-    $("#btn4").css({
-        backgroundColor: "transparent",
-        borderColor: "black"
-    });
-    
-    $("#btn5").css({
-        backgroundColor: "orange",
-        borderColor: "orange"
-    });
-}
-
-window.addEventListener("load", slide);
-btn1.addEventListener("click", setImg1);
-btn2.addEventListener("click", setImg2);
-btn3.addEventListener("click", setImg3);
-btn4.addEventListener("click", setImg4);
-btn5.addEventListener("click", setImg5);
+document.getElementById("sub").addEventListener("click", answer);
